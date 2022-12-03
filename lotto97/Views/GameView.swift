@@ -12,6 +12,9 @@ struct GameView: View {
     @State var isOutcomePresented: Bool = false
     
     var body: some View {
+        Color.myRed
+            .edgesIgnoringSafeArea(.top)
+            .overlay (
         VStack {
             VStack {
                 Text("Lotto 97")
@@ -74,11 +77,13 @@ struct GameView: View {
             }
             .frame(maxHeight: .infinity)
             .padding()
+            .background(Color.white)
         }
         .sheet(isPresented: $isOutcomePresented) {
             OutcomeView(isPresented: $isOutcomePresented, won: game.state.round == 15)
         }
         .navigationBarBackButtonHidden(true)
+        )
     }
     
     func optionOnePressed() {

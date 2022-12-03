@@ -14,6 +14,9 @@ struct WelcomeView: View {
     }
     
     var body: some View {
+        Color.myRed
+            .edgesIgnoringSafeArea(.top)
+            .overlay (
         VStack(alignment: .center, spacing: 20) {
             VStack(spacing: 5) {
                 HStack {
@@ -24,6 +27,8 @@ struct WelcomeView: View {
                         infoPresented = true
                     } label: {
                         Image(systemName: "info.circle")
+                            .resizable()
+                            .frame(width:12, height: 12)
                     }
                     .sheet(isPresented: $infoPresented) {
                         InfoView(isPresented: $infoPresented)
@@ -39,20 +44,19 @@ struct WelcomeView: View {
                 Text("Choose your own hardship")
                     .font(MyFont.bigbody)
                     .fontWeight(.bold)
-                    .padding([.horizontal, .bottom], 20)
+                    .padding([.horizontal], 20)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.myRed)
             VStack {
                 Text(bodyText)
                     .font(MyFont.body)
-                    .padding(.horizontal, 20)
-                    .padding(.leading, 10)
+                    .padding(.horizontal, 5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .multilineTextAlignment(.leading)
                 Spacer()
-                
-
                 Button {
                     beginPressed()
                 } label: {
@@ -64,19 +68,19 @@ struct WelcomeView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.all, 10)
                     }
-//                    Text("Begin")
-//                        .font(.system(size: 22))
-//                        .frame(maxWidth: .infinity)
-//                        .padding(.all, 10)
                 }
                 .background(Color.myRed)
                 .foregroundColor(.white)
                 .cornerRadius(20)
-                .padding()
+//                .padding()
                 .shadow(radius: 5)
             }
+            .padding()
+            .background(Color.white)
             .frame(maxHeight: .infinity)
         }
+//        .edgesIgnoringSafeArea(.all)
+        )
     }
     
     func beginPressed() {

@@ -20,6 +20,9 @@ struct OutcomeView: View {
     }
     
     var body: some View {
+        Color.myRed
+            .edgesIgnoringSafeArea(.top)
+            .overlay (
         VStack(alignment: .center, spacing: 20) {
             VStack {
                 Text("Lotto 97")
@@ -30,8 +33,7 @@ struct OutcomeView: View {
                 Text(titleText)
                     .font(MyFont.title)
                     .fontWeight(.bold)
-                    .padding()
-                    .padding(.leading, 10)
+                    .padding(.leading, 20)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .foregroundColor(.white)
@@ -40,8 +42,8 @@ struct OutcomeView: View {
             VStack {
                 Text(bodyText)
                     .font(MyFont.body)
-                    .padding(.horizontal, 20)
-                    .padding(.leading, 10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 10)
                 Spacer()
                 Button {
                     playAgainPressed()
@@ -54,11 +56,14 @@ struct OutcomeView: View {
                     .background(Color.myRed)
                     .foregroundColor(.white)
                     .cornerRadius(20)
-                    .padding()
                     .shadow(radius: 5)
             }
+            .padding()
+            .background(Color.white)
             .frame(maxHeight: .infinity)
         }
+        )
+//        .edgesIgnoringSafeArea(.all)
     }
     
     func playAgainPressed() {
