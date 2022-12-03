@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@main
+@available(iOS 14.0, *)
 struct lotto97App: App {
     var body: some Scene {
         WindowGroup {
