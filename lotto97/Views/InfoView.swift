@@ -17,20 +17,17 @@ struct InfoView: View {
             Text("Lotto 97")
                 .font(MyFont.title)
                 .fontWeight(.bold)
-            Text("An educational game inspired by the film Ilo Ilo.")
+            Text("An eductional game about the 1997 Asian financial crisis\n\nInspired by the 2013 film \"Ilo Ilo\" directed by Anthony Chen\n\nCreated by Adam Novak, Dec 2022\n\nCopyright @LeaveyLabs Inc.")
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
-            Text("Created by Adam Novak, Dec 2022")
-                .multilineTextAlignment(.center)
-            Text("Copyright @LeaveyLabs Inc.")
-                .multilineTextAlignment(.center)
+            Link("lotto97.xyz", destination: URL(string: "https://lotto97.xyz")!)
             Spacer()
             Button {
                 dismissPressed()
             } label: {
                 Text("Dismiss")
                     .frame(maxWidth: .infinity)
-                    .padding(10)
+                    .padding(15)
                     .font(.system(size: 20))
                     .foregroundColor(.myRed)
             }

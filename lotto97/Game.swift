@@ -24,12 +24,13 @@ import Foundation
     //Handle option 1 or 2
     func handleSelection(option: Int) {
         state = option == 1 ? state.round.outcomeOneClosure(state) : state.round.outcomeTwoClosure(state)
+        state.outcome = option == 1 ? state.round.outcomeOne : state.round.outcomeTwo
         
-        if state.savings <= 0 {
+        if state.savings <= 0 || state.roundIndex == Round.ALLROUNDS.count {
             state.didEnd = true
+        } else {
+            state.roundIndex += 1
         }
-        
-        state.roundIndex += 1
         if state.dateComponents.month == 12 {
             state.dateComponents.month = 1
             state.dateComponents.year! += 1
@@ -43,12 +44,15 @@ import Foundation
 struct GameState {
     var didEnd: Bool = false
     var didWin: Bool {
-        return roundIndex == 15
+        return roundIndex == Round.ALLROUNDS.count
     }
+    
+    var outcome: String = ""
     var roundIndex: Int = 1
     var round: Round {
         return Round.ALLROUNDS[roundIndex]!
     }
+    
     var dateComponents = DateComponents(year: 1997, month: 7)
     var prettyDate: String {
         let userCalendar = Calendar(identifier: .gregorian) // since the components above (like year 1980) are for Gregorian
@@ -77,13 +81,30 @@ struct Round {
     let outcomeOneClosure: (GameState) -> GameState
     let outcomeTwoClosure: (GameState) -> GameState
 
+    //MEDIAN INCOME IN SINGAPORE in 1997: $3617, or 3500
     static let ALLROUNDS: [Int:Round] = [
         1: Round(message: "hi",
-                 highlightedCharacter: "meep",
+                 highlightedCharacter: "OMlaksdjfkajsdf",
                  optionOne: "masdf",
                  optionTwo: "hi",
                  outcomeOne: "",
                  outcomeTwo: "",
+                 outcomeOneClosure: { gameState in
+                     var newState = gameState
+                     newState.savings -= 100
+                     return newState
+                 },
+                 outcomeTwoClosure: { gameState in
+                     var newState = gameState
+                     newState.savings -= 100
+                     return newState
+                 }),
+        2: Round(message: "OMlaksdjfkajsdf",
+                 highlightedCharacter: "👧",
+                 optionOne: "OMlaksdjfkajsdf",
+                 optionTwo: "OMlaksdjfkajsdf",
+                 outcomeOne: "OMlaksdjfkajsdf",
+                 outcomeTwo: "OMlaksdjfkajsdf",
                  outcomeOneClosure: { gameState in
                      var newState = gameState
                      newState.savings -= 100

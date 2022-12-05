@@ -13,6 +13,8 @@ enum SelectionState {
 
 struct GameView: View {
     @EnvironmentObject var game: Game
+    @State var infoPresented: Bool = false
+    @State var outcomePresented: Bool = false
     @State var selectionState: SelectionState = .choosing
     
     var body: some View {
@@ -21,15 +23,30 @@ struct GameView: View {
             .overlay (
         VStack {
             VStack {
-                Text("Lotto 97")
-                    .font(MyFont.body)
-                    .fontWeight(.bold)
-                    .padding(.top, 10)
+                HStack {
+                    Text("Lotto 97")
+                        .font(MyFont.body)
+                        .fontWeight(.bold)
+                    Button {
+                        infoPresented = true
+                    } label: {
+                        Image(systemName: "info.circle")
+                            .resizable()
+                            .frame(width:12, height: 12)
+                    }
+                    .sheet(isPresented: $infoPresented) {
+                        InfoView(isPresented: $infoPresented)
+                    }
+                }
+                .padding(.top, 10)
                 HStack(alignment: .center, spacing: 20) {
                     VStack(alignment: .leading, spacing: 20) {
                         Text("Date")
+                            .fontWeight(.bold)
                         Text("Savings")
+                            .fontWeight(.bold)
                         Text("Family")
+                            .fontWeight(.bold)
                     }
                     VStack(alignment: .leading, spacing: 20) {
                         Text(game.state.prettyDate)
@@ -46,47 +63,76 @@ struct GameView: View {
             .foregroundColor(.white)
             VStack(alignment: .center, spacing: 20) {
                 VStack(spacing: 0) {
-                    Text(game.state.round.highlightedCharacter)
-                        .font(.system(size: 60))
-                    Text(game.state.round.message)
-                        .font(MyFont.body)
-                        .multilineTextAlignment(.center)
-                        .padding()
+                    switch selectionState {
+                    case .choosing:
+                        Text(game.state.round.highlightedCharacter)
+                            .font(.system(size: 60))
+                            .minimumScaleFactor(0.5)
+                        Text(game.state.round.message)
+                            .font(MyFont.body)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .minimumScaleFactor(0.5)
+                    case .continuing:
+                        Text(game.state.outcome)
+                            .font(MyFont.body)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .minimumScaleFactor(0.5)
+                    }
                 }
                 .frame(maxHeight: .infinity)
-                Button {
-                    optionOnePressed()
-                } label: {
-                    Text(game.state.round.optionOne)
-                        .frame(maxWidth: .infinity)
-                        .frame(maxWidth: .infinity)
-                        .padding(.all, 15)
-                        .font(.system(size: 20))
+                switch selectionState {
+                case .choosing:
+                    Button {
+                        optionOnePressed()
+                    } label: {
+                        Text(game.state.round.optionOne)
+                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: .infinity)
+                            .padding(.all, 15)
+                            .font(.system(size: 20))
+                    }
+                    .background(Color.myRed)
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
+                    .shadow(radius: 5)
+                    Button {
+                        optionTwoPressed()
+                    } label: {
+                        Text(game.state.round.optionTwo)
+                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: .infinity)
+                            .padding(.all, 15)
+                            .font(.system(size: 20))
+                    }
+                    .background(Color.myRed)
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
+                    .shadow(radius: 5)
+                case .continuing:
+                    Button {
+                        continueButtonPressed()
+                    } label: {
+                        Text("Continue")
+                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: .infinity)
+                            .padding(.all, 15)
+                            .font(.system(size: 20))
+                    }
+                    .background(Color.myRed)
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
+                    .shadow(radius: 5)
                 }
-                .background(Color.myRed)
-                .foregroundColor(.white)
-                .cornerRadius(20)
-                .shadow(radius: 5)
-                Button {
-                    optionTwoPressed()
-                } label: {
-                    Text(game.state.round.optionTwo)
-                        .frame(maxWidth: .infinity)
-                        .frame(maxWidth: .infinity)
-                        .padding(.all, 15)
-                        .font(.system(size: 20))
-                }
-                .background(Color.myRed)
-                .foregroundColor(.white)
-                .cornerRadius(20)
-                .shadow(radius: 5)
+                
             }
             .frame(maxHeight: .infinity)
             .padding()
             .background(Color.white)
         }
-            .fullScreenCover(isPresented: $game.state.didEnd, content: {
-                OutcomeView(isPresented: $game.state.didEnd, won: game.state.didWin)
+            .fullScreenCover(isPresented: $outcomePresented, content: {
+                OutcomeView(isPresented: $outcomePresented, won: game.state.didWin)
             })
         .navigationBarBackButtonHidden(true)
         )
@@ -95,18 +141,21 @@ struct GameView: View {
     func optionOnePressed() {
         withAnimation {
             selectionState = .continuing
+            game.handleSelection(option: 1)
         }
-        game.handleSelection(option: 1)
     }
     
     func optionTwoPressed() {
         withAnimation {
             selectionState = .continuing
+            game.handleSelection(option: 2)
         }
-        game.handleSelection(option: 2)
     }
     
     func continueButtonPressed() {
+        if game.state.didEnd {
+            outcomePresented = true
+        }
         withAnimation {
             selectionState = .choosing
         }

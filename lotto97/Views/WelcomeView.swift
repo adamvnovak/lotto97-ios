@@ -10,7 +10,7 @@ import SwiftUI
 struct WelcomeView: View {
     @State var infoPresented: Bool = false
     var bodyText: String {
-        "You are a Singaporean family of 3 in the 1997 financial crisis.\n\nYour goal is to make it through without going bankrupt or losing any family members."
+        "You are a Chinese family of 3 in Singapore, and the 1997 financial crisis has just begun.\n\nYour goal is to make it through without going bankrupt or losing any family members.\n\nChoose wisely."
     }
     
     var body: some View {
@@ -56,6 +56,7 @@ struct WelcomeView: View {
                     .padding(.horizontal, 5)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
+                    .minimumScaleFactor(0.5)
                 Spacer()
                 Button {
                     beginPressed()
