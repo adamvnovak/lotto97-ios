@@ -11,6 +11,7 @@ struct InfoView: View {
     @Binding var isPresented: Bool
     
     var body: some View {
+        Color.myRed.edgesIgnoringSafeArea(.vertical).overlay(
         VStack(alignment: .center, spacing: 20) {
             Spacer()
             Text("Lotto 97")
@@ -42,7 +43,7 @@ struct InfoView: View {
         .padding()
         .background(Color.myRed)
         .foregroundColor(.white)
-    }
+    )}
     
     func dismissPressed() {
         isPresented = false

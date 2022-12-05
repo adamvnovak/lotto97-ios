@@ -51,7 +51,7 @@ struct OutcomeView: View {
                     Text("Play again")
                         .font(.system(size: 22))
                         .frame(maxWidth: .infinity)
-                        .padding(.all, 10)
+                        .padding(.all, 15)
                 }
                     .background(Color.myRed)
                     .foregroundColor(.white)

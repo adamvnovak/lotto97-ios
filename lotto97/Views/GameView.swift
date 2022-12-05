@@ -7,9 +7,13 @@
 
 import SwiftUI
 
+enum SelectionState {
+    case choosing, continuing
+}
+
 struct GameView: View {
     @EnvironmentObject var game: Game
-    @State var isOutcomePresented: Bool = false
+    @State var selectionState: SelectionState = .choosing
     
     var body: some View {
         Color.myRed
@@ -28,7 +32,7 @@ struct GameView: View {
                         Text("Family")
                     }
                     VStack(alignment: .leading, spacing: 20) {
-                        Text(game.state.date)
+                        Text(game.state.prettyDate)
                         Text(game.state.prettySavings)
                         Text(game.state.family)
                     }
@@ -42,9 +46,9 @@ struct GameView: View {
             .foregroundColor(.white)
             VStack(alignment: .center, spacing: 20) {
                 VStack(spacing: 0) {
-                    Text(game.state.highlightedCharacter)
+                    Text(game.state.round.highlightedCharacter)
                         .font(.system(size: 60))
-                    Text(game.state.message)
+                    Text(game.state.round.message)
                         .font(MyFont.body)
                         .multilineTextAlignment(.center)
                         .padding()
@@ -53,10 +57,11 @@ struct GameView: View {
                 Button {
                     optionOnePressed()
                 } label: {
-                    Text(game.state.option1)
+                    Text(game.state.round.optionOne)
                         .frame(maxWidth: .infinity)
                         .frame(maxWidth: .infinity)
-                        .padding(.all, 10)
+                        .padding(.all, 15)
+                        .font(.system(size: 20))
                 }
                 .background(Color.myRed)
                 .foregroundColor(.white)
@@ -65,10 +70,11 @@ struct GameView: View {
                 Button {
                     optionTwoPressed()
                 } label: {
-                    Text(game.state.option2)
+                    Text(game.state.round.optionTwo)
                         .frame(maxWidth: .infinity)
                         .frame(maxWidth: .infinity)
-                        .padding(.all, 10)
+                        .padding(.all, 15)
+                        .font(.system(size: 20))
                 }
                 .background(Color.myRed)
                 .foregroundColor(.white)
@@ -79,19 +85,31 @@ struct GameView: View {
             .padding()
             .background(Color.white)
         }
-        .sheet(isPresented: $isOutcomePresented) {
-            OutcomeView(isPresented: $isOutcomePresented, won: game.state.round == 15)
-        }
+            .fullScreenCover(isPresented: $game.state.didEnd, content: {
+                OutcomeView(isPresented: $game.state.didEnd, won: game.state.didWin)
+            })
         .navigationBarBackButtonHidden(true)
         )
     }
     
     func optionOnePressed() {
-        
+        withAnimation {
+            selectionState = .continuing
+        }
+        game.handleSelection(option: 1)
     }
     
     func optionTwoPressed() {
-        
+        withAnimation {
+            selectionState = .continuing
+        }
+        game.handleSelection(option: 2)
+    }
+    
+    func continueButtonPressed() {
+        withAnimation {
+            selectionState = .choosing
+        }
     }
 }
 
