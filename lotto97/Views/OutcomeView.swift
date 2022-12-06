@@ -18,7 +18,7 @@ struct OutcomeView: View {
     }
     var bodyText: String {
         won ? "You made it through the 1997 Asian financial crisis without losing family members or going bankrupt.\n\n"
-        : "You didn't make it through the 1997 Asian financial crisis."
+        : "Your family didn't make it through the 1997 Asian financial crisis."
     }
     
     var body: some View {
@@ -59,13 +59,13 @@ struct OutcomeView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 10)
                 if won {
-                    Link("Learn more about the history", destination: URL(string: "https://en.wikipedia.org/wiki/1997_Asian_financial_crisis#:~:text=The%20Asian%20financial%20crisis%20was,worries%20of%20a%20meltdown%20subsided.")!)
+                    Link("Learn more about the crisis", destination: URL(string: "https://en.wikipedia.org/wiki/1997_Asian_financial_crisis#:~:text=The%20Asian%20financial%20crisis%20was,worries%20of%20a%20meltdown%20subsided.")!)
                         .font(MyFont.body)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 10)
                         .padding(.bottom, 20)
                         .multilineTextAlignment(.trailing)
-                    Link("Watch the 2013 film \"Ilo Ilo.\"", destination: URL(string: "https://www.kanopy.com/en/product/132220")!)
+                    Link("Watch the 2013 film \"Ilo Ilo\"", destination: URL(string: "https://www.kanopy.com/en/product/132220")!)
                         .font(MyFont.body)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 10)

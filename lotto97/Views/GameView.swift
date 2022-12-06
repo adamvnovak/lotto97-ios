@@ -22,22 +22,24 @@ struct GameView: View {
             .edgesIgnoringSafeArea(.top)
             .overlay (
         VStack {
-            VStack {
+            VStack (alignment: .leading) {
                 HStack {
                     Text("Lotto 97")
-                        .font(MyFont.body)
+                        .font(MyFont.smallbody)
                         .fontWeight(.bold)
+                    
                     Button {
                         infoPresented = true
                     } label: {
                         Image(systemName: "info.circle")
                             .resizable()
-                            .frame(width:12, height: 12)
+                            .frame(width:10, height: 10)
                     }
                     .sheet(isPresented: $infoPresented) {
                         InfoView(isPresented: $infoPresented)
                     }
                 }
+                .frame(maxWidth: .infinity)
                 .padding(.top, 10)
                 HStack(alignment: .center, spacing: 20) {
                     VStack(alignment: .leading, spacing: 20) {
@@ -48,17 +50,18 @@ struct GameView: View {
                         Text("Family")
                             .fontWeight(.bold)
                     }
+                    .frame(width: 150)
                     VStack(alignment: .leading, spacing: 20) {
                         Text(game.state.prettyDate)
                         Text(game.state.prettySavings)
                         Text(game.state.family)
                     }
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                
                 .frame(maxHeight: .infinity)
                 .font(MyFont.bigbody)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: 250)
             .background(Color.myRed)
             .foregroundColor(.white)
             VStack(alignment: .center, spacing: 20) {
@@ -67,12 +70,12 @@ struct GameView: View {
                     case .choosing:
                         Text(game.state.round.highlightedCharacter)
                             .font(.system(size: 60))
-                            .minimumScaleFactor(0.5)
+                            .minimumScaleFactor(0.2)
                         Text(game.state.round.message)
                             .font(MyFont.body)
                             .multilineTextAlignment(.center)
-                            .padding()
                             .minimumScaleFactor(0.5)
+                            .padding()
                     case .continuing:
                         Text(game.state.outcome)
                             .font(MyFont.body)
@@ -91,7 +94,7 @@ struct GameView: View {
                             .frame(maxWidth: .infinity)
                             .frame(maxWidth: .infinity)
                             .padding(.all, 15)
-                            .font(.system(size: 20))
+                            .font(.system(size: 18))
                     }
                     .background(Color.myRed)
                     .foregroundColor(.white)
@@ -104,7 +107,8 @@ struct GameView: View {
                             .frame(maxWidth: .infinity)
                             .frame(maxWidth: .infinity)
                             .padding(.all, 15)
-                            .font(.system(size: 20))
+                            .font(.system(size: 18))
+                            .minimumScaleFactor(0.5)
                     }
                     .background(Color.myRed)
                     .foregroundColor(.white)
@@ -118,7 +122,8 @@ struct GameView: View {
                             .frame(maxWidth: .infinity)
                             .frame(maxWidth: .infinity)
                             .padding(.all, 15)
-                            .font(.system(size: 20))
+                            .font(.system(size: 18))
+                            .minimumScaleFactor(0.5)
                     }
                     .background(Color.myRed)
                     .foregroundColor(.white)
