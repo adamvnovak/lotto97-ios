@@ -7,12 +7,12 @@
 
 import Foundation
 
-class DeviceService: NSObject {
+class DeviceService: NSObject, ObservableObject {
     
     static var shared = DeviceService()
     private let LOCAL_FILE_APPENDING_PATH = "device.json"
     private var localFileLocation: URL!
-    private var device: Device!
+    @Published private var device: Device!
     
     //MARK: - Initializer
     
@@ -32,11 +32,17 @@ class DeviceService: NSObject {
     //MARK: - Getters
     
     func hasRatedApp() -> Bool { return device.hasRatedApp }
-    
+    func numberOfTries() -> Int { return device.numberOfTries }
+
     //MARK: - Setters
     
     func didRateApp() {
         device.hasRatedApp = true
+        Task { await saveToFilesystem() }
+    }
+    
+    func didTry() {
+        device.numberOfTries += 1
         Task { await saveToFilesystem() }
     }
     

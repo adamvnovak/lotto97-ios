@@ -16,7 +16,8 @@ struct GameView: View {
     @State var infoPresented: Bool = false
     @State var outcomePresented: Bool = false
     @State var selectionState: SelectionState = .choosing
-    
+    @StateObject var device = DeviceService.shared
+
     var body: some View {
         Color.myRed
             .edgesIgnoringSafeArea(.top)
@@ -25,22 +26,28 @@ struct GameView: View {
             VStack (alignment: .leading) {
                 HStack {
                     Text("Lotto 97")
-                        .font(MyFont.smallbody)
+                        .font(MyFont.body)
                         .fontWeight(.bold)
-                    
                     Button {
                         infoPresented = true
                     } label: {
                         Image(systemName: "info.circle")
                             .resizable()
-                            .frame(width:10, height: 10)
+                            .frame(width:12, height: 12)
                     }
                     .sheet(isPresented: $infoPresented) {
                         InfoView(isPresented: $infoPresented)
                     }
+                    Spacer()
+                    Text(String(device.numberOfTries()) + (device.numberOfTries() == 1 ? " try" : " tries" ))
+                        .font(MyFont.body)
+                        .padding(.horizontal, 5)
+                        .multilineTextAlignment(.leading)
+                        .minimumScaleFactor(0.5)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, 10)
+                .padding([.trailing,.leading], 25)
                 HStack(alignment: .center, spacing: 20) {
                     VStack(alignment: .leading, spacing: 20) {
                         Text("Date")
@@ -135,6 +142,8 @@ struct GameView: View {
             .frame(maxHeight: .infinity)
             .padding()
             .background(Color.white)
+        }.onAppear {
+            DeviceService.shared.didTry()
         }
             .fullScreenCover(isPresented: $outcomePresented, content: {
                 OutcomeView(isPresented: $outcomePresented, won: game.state.didWin)

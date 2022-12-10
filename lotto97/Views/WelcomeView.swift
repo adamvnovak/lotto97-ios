@@ -9,6 +9,8 @@ import SwiftUI
 
 struct WelcomeView: View {
     @State var infoPresented: Bool = false
+    @StateObject var device = DeviceService.shared
+
     var bodyText: String {
         "You are a Chinese family of 3 in Singapore, and the 1997 financial crisis has just begun.\n\nYour goal is to make it through without going bankrupt or losing any family members.\n\nChoose wisely."
     }
@@ -33,8 +35,15 @@ struct WelcomeView: View {
                     .sheet(isPresented: $infoPresented) {
                         InfoView(isPresented: $infoPresented)
                     }
+                    Spacer()
+                    Text(String(device.numberOfTries()) + (device.numberOfTries() == 1 ? " try" : " tries" ))
+                        .font(MyFont.body)
+                        .padding(.horizontal, 5)
+                        .multilineTextAlignment(.leading)
+                        .minimumScaleFactor(0.5)
                 }
                 .padding(.top, 10)
+                .padding([.trailing,.leading], 25)
                 Spacer()
                 Text("Lotto 97")
                     .font(MyFont.title)
@@ -85,7 +94,7 @@ struct WelcomeView: View {
     }
     
     func beginPressed() {
-        
+//        DeviceService.shared.didTry()
     }
 }
 

@@ -11,7 +11,8 @@ struct OutcomeView: View {
     @EnvironmentObject var game: Game
     @Binding var isPresented: Bool
     @State var infoPresented: Bool = false
-    
+    @StateObject var device = DeviceService.shared
+
     var won: Bool
     var titleText: String {
         won ? "Congrajulations!" : "Tough luck."
@@ -41,8 +42,15 @@ struct OutcomeView: View {
                     .sheet(isPresented: $infoPresented) {
                         InfoView(isPresented: $infoPresented)
                     }
+                    Spacer()
+                    Text(String(device.numberOfTries()) + (device.numberOfTries() == 1 ? " try" : " tries" ))
+                        .font(MyFont.body)
+                        .padding(.horizontal, 5)
+                        .multilineTextAlignment(.leading)
+                        .minimumScaleFactor(0.5)
                 }
                 .padding(.top, 10)
+                .padding([.trailing,.leading], 25)
                 Spacer()
                 Text(titleText)
                     .font(MyFont.title)
@@ -100,6 +108,7 @@ struct OutcomeView: View {
     }
     
     func playAgainPressed() {
+        DeviceService.shared.didTry()
         game.reset()
         isPresented = false
     }
