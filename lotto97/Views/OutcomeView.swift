@@ -52,7 +52,6 @@ struct OutcomeView: View {
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
-            .background(Color.myRed)
             VStack (alignment: .leading) {
                 Text(bodyText)
                     .font(MyFont.body)
@@ -88,6 +87,14 @@ struct OutcomeView: View {
             .background(Color.white)
             .frame(maxHeight: .infinity)
         }
+            .onAppear {
+                if won {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        guard isPresented else { return }
+                        AppStoreReviewManager.requestReviewIfAppropriate()
+                    }
+                }
+            }
         )
 //        .edgesIgnoringSafeArea(.all)
     }

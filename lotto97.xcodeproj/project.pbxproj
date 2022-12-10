@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4702022A2944471800DFE00B /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470202292944471800DFE00B /* AppStoreReviewManager.swift */; };
+		4702022C2944474A00DFE00B /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4702022B2944474A00DFE00B /* Device.swift */; };
+		4702022E2944475000DFE00B /* DeviceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4702022D2944475000DFE00B /* DeviceService.swift */; };
 		4729CDCE293ACAF2007553AB /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729CDCD293ACAF2007553AB /* Game.swift */; };
 		4729CDD0293ACC71007553AB /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729CDCF293ACC71007553AB /* Environments.swift */; };
 		4729CDD2293AD34B007553AB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729CDD1293AD34B007553AB /* GameView.swift */; };
@@ -45,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		470202292944471800DFE00B /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
+		4702022B2944474A00DFE00B /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		4702022D2944475000DFE00B /* DeviceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceService.swift; sourceTree = "<group>"; };
 		4729CDCD293ACAF2007553AB /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		4729CDCF293ACC71007553AB /* Environments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
 		4729CDD1293AD34B007553AB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -137,8 +143,11 @@
 				478AD352293AC8F2002A5CBD /* Extensions */,
 				478AD32C293AC05A002A5CBD /* Preview Content */,
 				478AD350293AC387002A5CBD /* MyFont.swift */,
+				470202292944471800DFE00B /* AppStoreReviewManager.swift */,
 				4729CDCD293ACAF2007553AB /* Game.swift */,
 				4729CDCF293ACC71007553AB /* Environments.swift */,
+				4702022B2944474A00DFE00B /* Device.swift */,
+				4702022D2944475000DFE00B /* DeviceService.swift */,
 			);
 			path = lotto97;
 			sourceTree = "<group>";
@@ -317,10 +326,13 @@
 				4729CDDB293BD84A007553AB /* InfoView.swift in Sources */,
 				478AD35C293AC8F2002A5CBD /* Encodable+Dict.swift in Sources */,
 				4729CDD9293ADB23007553AB /* OutcomeView.swift in Sources */,
+				4702022C2944474A00DFE00B /* Device.swift in Sources */,
 				4729CDD7293ADB19007553AB /* WelcomeView.swift in Sources */,
 				478AD327293AC059002A5CBD /* lotto97App.swift in Sources */,
+				4702022A2944471800DFE00B /* AppStoreReviewManager.swift in Sources */,
 				478AD35A293AC8F2002A5CBD /* Color+Hex.swift in Sources */,
 				4729CDDD293BDEC1007553AB /* AppWrapper.swift in Sources */,
+				4702022E2944475000DFE00B /* DeviceService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,7 +503,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -528,7 +540,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
