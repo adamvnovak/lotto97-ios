@@ -114,7 +114,7 @@ struct Round {
                  }),
         2: Round(message: "You get a call from school that your son’s behavior has gotten extremely disruptive.",
                  highlightedCharacter: "👩",
-                 optionOne: "Hire a foreign made to take care of him.",
+                 optionOne: "Hire a foreign maid to take care of him.",
                  optionTwo: "Punish him at home, but this time more severely.",
                  outcomeOne: "You budget out $5000 for a Filipino maid for the next year or so.",
                  outcomeTwo: "Your son seems to shape up and listen to you.",
