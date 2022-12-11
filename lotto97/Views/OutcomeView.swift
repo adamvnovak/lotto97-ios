@@ -15,7 +15,7 @@ struct OutcomeView: View {
 
     var won: Bool
     var titleText: String {
-        won ? "Congrajulations!" : "Tough luck."
+        won ? "Congratulations!" : "Tough luck."
     }
     var bodyText: String {
         won ? "You made it through the 1997 Asian financial crisis without losing family members or going bankrupt.\n\n"

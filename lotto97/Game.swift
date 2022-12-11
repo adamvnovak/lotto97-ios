@@ -320,7 +320,7 @@ struct Round {
                  highlightedCharacter: "👩",
                  optionOne: "Try for a child",
                  optionTwo: "Don’t try for a child",
-                 outcomeOne: "Congrajulations! You're pregnant.",
+                 outcomeOne: "Congratulations! You're pregnant.",
                  outcomeTwo: "Your husband grows slightly more annoyed with you.",
                  outcomeOneClosure: { gameState in
                      var newState = gameState
